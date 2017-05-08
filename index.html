@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="bootstrap-4/dist/js/main.js"></script>
+    <script src="bootstrap-4/dist/js/boostrap.js"></script>
+
+    <!--jQuery CDN reference-->
+   
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap-4/dist/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="bootstrap-4/dist/css/bootstrap-reboot.css" />
+    <link rel="stylesheet" href="bootstrap-4/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap-4/dist/css/variables.css" />
+    <link rel="stylesheet" href="bootstrap-4/dist/css/custom.css" />
+   
+    <link rel="stylesheet" type="text/css" href="algae_cal.css">
+
+
+
+<!--Courtesy of Omar Yafer on Stack Overflow http://stackoverflow.com/questions/43850033/display-div-based-on-day-and-time-week-and-weekend-->
+    <script>
+
+      (function($){
+  $(document).ready(function(){    
+    function setupHours(myDate){
+        var dayOfWeek = myDate.getDay();
+        var status = 'open';         
+            
+        switch(dayOfWeek){
+           case 0: //sunday
+           case 6: //Saturday
+              console.log("Weekend");
+              //from 8:00:00 to 13:59:59
+              status =  testRange(8,30, 14, 30, myDate) ? 'Speak to Our Bone Health Specialists':'' //Test your range      
+              break;
+           case 1: //Monday
+           case 2://tusday
+           case 3://wednesday
+           case 4://thursday
+           case 5: //friday
+              console.log('weekday');
+              //from 8:00:00 to 15:59:59
+              status = testRange(8,30, 16, 30, myDate) ? 'Speak to Our Bone Health Specialists':''   //Test your range
+              break;
+        }
+        
+        //TODO: delete, test case console log
+        console.log("Status for: " +myDate+ " is " + status.toUpperCase());
+    
+        $('.hours').text(status);
+    
+    }
+    
+    function testRange(lHour,lMin, hHour ,hMin, actualDate){
+      var lowDate = new Date(actualDate); //Create a new date based on the one you need to test
+      lowDate.setHours(lHour); //set hour to your loweHour
+      lowDate.setMinutes(lMin); //Set min to your lowerMin
+      lowDate.setSeconds(0); //Set seconds to 0
+      lowDate.setMilliseconds(0); //Set mill to 0
+      
+      var highDate = new Date(actualDate); //Create a new date based on the one you need to test
+      highDate.setHours(hHour); //set hour to your higher our
+      highDate.setMinutes(hMin); //set hour to you higher mir
+      highDate.setSeconds(0);//Set seconds to 0
+      highDate.setMilliseconds(0);//Set mill to 0
+      
+      return actualDate >= lowDate && actualDate <= highDate //Test if the actual date is in range. 
+      
+    }
+    
+    //TODO: delete, for test cases only
+    
+    setupHours(new Date(2017, 4, 8, 7, 59, 00, 00)); // monday 7:59
+    setupHours(new Date(2017, 4, 8, 8, 00, 00, 00)); // monday 8:00
+    setupHours(new Date(2017, 4, 8, 15, 59, 59, 00)); // monday 15:59
+    setupHours(new Date(2017, 4, 8, 16, 00, 00, 00)); // monday 16:00
+    setupHours(new Date(2017, 4, 8, 16, 30, 00, 00)); // monday 16:30
+    
+    setupHours(new Date(2017, 4, 13, 7, 59, 00, 00)); // saturday 7:59
+    setupHours(new Date(2017, 4, 13, 8, 00, 00, 00)); // saturday 8:00
+    setupHours(new Date(2017, 4, 13, 13, 59, 59, 00)); // saturday 15:59
+    setupHours(new Date(2017, 4, 13, 14, 00, 00, 00)); // saturday 16:00
+    setupHours(new Date(2017, 4, 13, 14, 30, 00, 00)); // saturday 16:30
+    
+    //TODO: Non test code, keep as is
+    setupHours(new Date());
+    
+    
+  });
+})(jQuery);
+
+</script>
+      
+  </head>
+  <body>
+
+
+
+
+<!--Video-->
+<div class='container-fluid'>
+      <div class='row justify-content-center justify-content-lg-between medium_top_margin' >
+        <div class='push-sm-2'></div>
+        <div class='col-10 col-lg-6' class='logo_container'>
+          <img src='img/logo.png' class='logo' alt='AlgaeCal Logo' />
+         </div> 
+     
+        <div class='col-10 col-lg-4 align-self-center medium_top_margin' id='phone_number'>
+            <a href='Tel:1-800-820-0184'>
+              <h2 class='bold right_align_text'>Tap to Talk 
+              <span class='text_blue'>1-800-820-0184</span></h2></a>
+              <div id='date-filtering' class='speak hours'>
+                <span>Speak</span>
+              </div>
+         </div> 
+      </div>
+    </div>
+
+  
+    <div class='container-fluid green-background'>
+        <div class='row justify-content-center no-gutters'>
+          <div class='col-3 col-md-4 align-self-start white_line'>
+            <img src='img/white_line.png' class='white_line' alt='Decorative White Line'>
+          </div>
+          <div class='col-6 col-md-4 align-self-center'>
+              <h1 class='center intro'>INTRODUCING</h1>
+          </div>
+          <div class='col-3 col-md-4 align-self-start white_line '> 
+            <img src='img/white_line.png' alt='Decorative White Line'>
+          </div>
+        </div>
+
+        <div class='row justify-content-center'>
+          <div class='col-10 col-md-8 col-lg6'>
+            <h1 class='text_white'>The ONLY Calcium Supplement that<span class='text_white large_underline_text'> Increase Bone Density*</span>...or Your Money Back</h1>
+          </div> 
+        </div>
+    </div>
+
+    <div class='container-fluid'>
+
+      <div class='row justify-content-center no-gutters' id='video'>
+        <div class='col-sm-1 '></div>
+        <div class='col-sm-10  align-self-start large_top_margin-lg'>
+          <p class='increase_text'> Build <span class='bold'>brand new bone</span> WITHIN 6 MONTHS with this <span class='bold'>rare algae</span> calcium...even if you're 85!</p>
+        </div>
+        <div class='col-sm-1 col-md-2'></div>
+        <div class='col-sm-12 col-md-8  large_margin'>
+          <!-- Wistia Video -->
+        
+
+          <script src="//fast.wistia.com/embed/medias/cecdwaq3dz.jsonp" async></script>
+          <script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+          
+          <div class="wistia_responsive_padding video_position" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+              <div class="wistia_embed wistia_async_cecdwaq3dz" id='v1' videoFoam="true" style="height:100%;width:100%">&nbsp;</div>
+            </div>
+          </div>
+          <!--End Wisita Video-->
+
+
+
+          <div id='play_button_container' class='align-self-center'>
+            <a href='#!' id='play_button'>
+              <div class='play_button'> 
+                <h1 class='center text_white'> ►</h1>
+              </div>
+            </a>
+          </div>
+      </div>    
+       <div class='col-sm-1 col-md-2'></div>
+            <div id='tap_to_play'>
+              <div class='one'>
+                <img src='img/tap_arrow.png' alt='' />
+              </div>
+              <div class='two'>
+                <h4 class='right small_text_white light'>Tap to Play</h4>
+              </div>
+          </div>
+            <div class='col-2 col-md-3'>
+              
+            </div>  
+            
+          
+        
+      </div>
+    
+</div>
+<!--Products-->
+<div class='container' id='all_products'>
+    <div class='third'>
+      <div class='discount'>
+          <h5 class='center text_white'>20&#37; <br /> <sup>OFF</sup></h5>
+        </div>
+      <div class='row products'>
+        
+          <div class='col-sm-1'></div>
+
+          <div class='col-sm-10 align-self-start product_box'>
+            <h1 class='center'>3 Month <span class='hidden-md-up'>Supply</span><span class='hidden-sm-down'><br /> Supply</span></h1>
+            <h4 class='center text_blue'>4 AlgaeCal Plus</h4>
+            <h4 class='center text_blue'>3 Strontium Boost</h4>
+            <img src='img/ap_sb_3mth.png' alt='3 Month Supply of AlgaeCal Plus and Strontium Boost' />
+            <h1 class='center price'><span class='dollar_sign'><sup>&#36;</sup></span>233 <span class='usd'><sup>USD</sup></span></h1>
+            <h4 class='center yellow_highlight'>Only <sup>&#36;</sup><span class='bold_small'>2.58</span>/Day!</h4>
+            <div class='button'>
+              <img src='img/guarantee.png' class='guarantee' alt='7 year stronger bones guarantee badge' />
+              <form action='http://www.algaecal.com/product/bone-builder-packs/'>
+                <input type='submit' value='  &nbsp; &nbsp;   Add to Cart  ►' />     
+              </form>
+            </div>
+          </div>
+
+          <div class='col-sm-1'> </div>
+
+      </div>
+    </div>  
+
+    <div class='third'>
+      <div class='blue'>
+          <p class='center text_white'>MOST POPULAR</p>
+      <div class='discount_blue'>
+          <h5 class='center text_white'>35&#37; <br /> <sup>OFF</sup></h5>
+        </div>
+      <div class='row products'>
+        
+          <div class='col-sm-1'></div>
+
+          <div class='col-sm-10 align-self-start product_box white'>
+            <h1 class='center'>6 Month Supply</h1>
+            <h4 class='center text_blue'>8 AlgaeCal Plus</h4>
+            <h4 class='center text_blue'>6 Strontium Boost</h4>
+            <img src='img/ap_sb_6mth.png' alt='6 Month Supply of AlgaeCal Plus and Strontium Boost' />
+            <h1 class='center price'><span class='dollar_sign'><sup>&#36;</sup></span>337 <span class='usd'><sup>USD</sup></span></h1>
+            <h4 class='center yellow_highlight'>Only <sup>&#36;</sup><span class='bold_small'>2.09</span>/Day!</h4>
+            <div class='button'>
+              <img src='img/guarantee.png' class='guarantee' alt='7 year stronger bones guarantee badge' />
+              <form action='http://www.algaecal.com/product/bone-builder-packs/'>
+                <input type='submit' value='  &nbsp; &nbsp;   Add to Cart  ►' />     
+              </form>     
+            </div>
+          </div>
+
+          <div class='col-sm-1'> </div>
+          </div>
+      </div>
+    </div>  
+
+    <div class='third'>
+      <div class='discount'>
+          <h5 class='center text_white'>38&#37; <br /> <sup>OFF</sup></h5>
+        </div>
+      <div class='row products'>
+        
+          <div class='col-sm-1'></div>
+
+          <div class='col-sm-10 align-self-start product_box'>
+            <h1 class='center'>12 Month Supply</h1>
+            <h4 class='center text_blue'>16 AlgaeCal Plus</h4>
+            <h4 class='center text_blue'>12 Strontium Boost</h4>
+            <img src='img/ap_sb_12mth.png' alt='12 Month Supply of AlgaeCal Plus and Strontium Boost' />
+            <h1 class='center price'><span class='dollar_sign'><sup>&#36;</sup></span>717 <span class='usd'><sup>USD</sup></span></h1>
+            <h4 class='center yellow_highlight'>Only <sup>&#36;</sup><span class='bold_small'>1.97</span>/Day!</h4>
+            <div class='button'>
+              <img src='img/guarantee.png' class='guarantee' id='guarantee' alt='7 year stronger bones guarantee badge' />
+              <form action='http://www.algaecal.com/product/bone-builder-packs/'>
+                <input type='submit' value='  &nbsp; &nbsp;   Add to Cart  ►' />     
+              </form>     
+            </div>
+          </div>
+
+          <div class='col-sm-1'> </div>
+
+      </div>
+    </div>
+    <div class='clearfix'></div>
+</div>
+
+<!--Supplement TABLES-->
+<div class='container'>
+    <div class='row justify-content-center'>
+      <div class='col-sm-12 col-md-8 col-lg-6 max-width'>
+        <h1 class='center'>AlgaeCal Plus</h1>
+
+        <div class='table'>
+          <h2 class='center'>Supplement Facts</h2>
+          <p class='table_servings bold_small'>4 Capsules Per Day</p>
+          <p class='table_servings bold_small bottom_margin_small'>Servings Per Container: 22</p>
+
+          <thead>
+            <tr>
+              <div class='thick_table_line'> &nbsp;</div>
+                <th>
+                  Amount Per Serving
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+                <th>
+                  &nbsp;
+                </th>
+                <th>
+                  &nbsp;
+                </th>
+
+                <th>
+                  &nbsp;
+                </th>
+                <th>
+                  &nbsp;
+                </th>
+
+                <th align='right' class='right'>
+                  &#37; DV
+                </th>
+              <div class='thin_table_line'>&nbsp;</div>  
+            </tr>  
+          </thead>
+
+
+        <tbody>
+            <tr>
+              <td>
+                <span class='bold_small'>Vitamin C 50mg</span><p class='small_text'>(as calcium ascorbate)</p>
+              </td>
+
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+
+              
+           
+              <td>
+                  <span class='bold_small'>84&#37;</span>
+              </td>
+
+            </tr>
+              <p></p>
+                <tr>
+                  <td>
+                    <span class='bold_small'>Vitamin D3 1600 IU</span><p class='small_text'>(as cholecalciferol)</p>
+                  </td>
+
+                  
+                   
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  
+                  
+                  
+               
+                  <td>
+                      <span class='bold_small'>400&#37;</span>
+                  </td>
+
+                </tr>
+
+              <p></p>
+                <tr>
+                  <td>
+                    <span class='bold_small'>Vitamin K2 100 mcg</span><p class='small_text'>(as menaquinone-7)</p>
+                  </td>
+
+                  
+                   
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  
+                  
+                  
+               
+                  <td>
+                      <span class='bold_small'>126&#37;</span>
+                  </td>
+
+                </tr> 
+
+              <p></p>
+                <tr>
+                  <td>
+                    <span class='bold_small'>Calcium 720 mg</span><p class='small_text'>(from algas calcareas)</p>
+                  </td>
+
+                  
+                   
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                  
+                  
+                  
+               
+                  <td>
+                      <span class='bold_small'>72&#37;</span>
+                  </td>
+
+                </tr>
+              <p></p>
+                <tr>
+                  <td>
+                    <span class='bold_small'>Magnesium 350 mg</span><p class='small_text'>(from algas calcareas and magnesium oxide)</p>
+                  </td>
+
+                  
+                   
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                  <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                    <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+                   <td>
+                      &nbsp;
+                  </td>
+               
+                  <td>
+                      <span class='bold_small'>88&#37;</span>
+                  </td>
+
+                </tr> 
+
+              <p></p>         
+                <div class='thick_table_line'> &nbsp;</div>
+                <tr>
+                  <td>
+                    <span class='bold_small'>Boron 3.0 mg&#42;</span><p class='small_text'>(as glycinate)</p>
+                  </td>
+                </tr>  
+              <p></p>        
+
+                <div class='thick_table_line'> &nbsp;</div>
+              <p></p>        
+                <tr>
+                  <td>
+                    <p class='small_text'>&#42;Daily Value (DV) not established</p>
+                  </td>
+                </tr>                                    
+        </tbody>
+        </div>
+      </div>  
+
+    <!--STRONTIUM BOOST TABLE-->
+
+      <div class='col-sm-12 col-md-8 col-lg-6 max-width'>
+        <h1 class='center'>Strontium Boost</h1>
+
+        <div class='table'>
+          <h2 class='center'>Supplement Facts</h2>
+          <p class='table_servings bold_small'>2 Capsules Per Day</p>
+          <p class='table_servings bold_small bottom_margin_small'>Servings Per Container: 30</p>
+          
+          <thead>
+            <tr>
+              <div class='thick_table_line'> &nbsp;</div>
+                <th>
+                  Amount Per Serving
+                </th>
+
+              <div class='thin_table_line'>&nbsp;</div>  
+            </tr>  
+          </thead>
+
+
+        <tbody>
+            <tr>
+              <td>
+                <span class='bold_small'>Strontium</span><p class='small_text'>(from Strontium Citrate)</p>
+              </td>
+
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+              <td>
+                  &nbsp;
+              </td>
+               <td>
+                  &nbsp;
+              </td>
+             </tr>
+             
+             
+
+              
+           
+              <td>
+                  <span class='bold_small'>680 mg&#42;</span>
+              </td>
+
+              <p></p>        
+
+                <div class='thick_table_line'> &nbsp;</div>
+              <p></p>        
+                <tr>
+                  <td>
+                    <p class='small_text'>&#42;Daily Value (DV) not established</p>
+                  </td>
+                </tr>                                    
+        </tbody>
+        </div>
+      </div>  
+</div>
+
+<!--Guarantee-->
+<div class='container-fluid'>
+  
+
+    <div class='row justify-content-center green-background'>
+      <div class='col-sm-1'></div>
+      <div class='col-10 white guarantee_container'>
+        <div class='col-sm-12'>
+           <img src='img/guarantee.png' alt='7 Year Stronger Bones Guarantee' />
+        </div>
+        <div class='col-sm-12 '>
+          <h2 class='orange_text bold'>Stronger Bones for 7 Years Guarantee</h2>
+          <p>When you follow directions for use of AlgaeCal Plus and Strontium Boost &ndash; we guarantee you will see increased bone density in EVERY follow-up bone scan you have while using these 2 products &ndash; or we will refund every penny you paid for our products between your scans. This guarantee extends to every scan you have for the next 7 years! Also, if you are unsatisfied at any time you can return my product for a full refund, no questions asked! <span class='text_blue underline'><a href='#!' class='text_blue' id='link' >Click Here for Details</a></span></p>
+          <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+      </div>
+      <div class='col-sm-1'></div>
+  
+      <div class='col-sm-1'></div>
+      
+      <div class='col-sm-10 white background_no_margin'>
+        <img src='img/dean_neuls.jpg' class='round_img' alt='CEO and Co-Founder Dean Neuls' />
+        <img src='img/signature.png' class='signature' alt='CEO and Co-Founder  Dean Neuls signature' />
+        <div class='founder_text'>
+          <p class='bold no_top_bottom_margin'>Dean Neuls,</p>
+          <p class='regular no_top_bottom_margin'>CEO and Co-Founder,</p>
+          <p class='regular no_top_bottom_margin'>AlgaeCal Inc.</p>
+        </div>  
+      </div>
+      <div class='col-sm-1'></div>
+     </div> 
+  </div>
+</div>
+<!--As Seen On-->
+<div class='container-fluid'>
+  <div class='box-shadow'>
+    <div class='plain_green_background'>
+            <h2 class='text_white center'>As Seen On:</h2>
+    </div>
+    <div class='white_background '>
+      <div class='row justify-content-center'>  
+          <div class='col-sm-3 as_seen_on'>
+             <img src='img/oz_logo.png' alt='Dr. Oz Show Logo' /> 
+          </div>
+          <div class='col-sm-3 as_seen_on'>
+             <img src='img/foxnews_logo.png' alt='Fox News Logo' /> 
+          </div>
+          <div class='col-sm-3 as_seen_on'>
+             <img src='img/pbs_logo.png' alt='PBS Logo' /> 
+          </div>
+          <div class='col-sm-3 as_seen_on'>
+             <img src='img/amazon_logo.png' alt='Amazon Logo' /> 
+          </div>     
+
+          <div class=' col-sm-1 col-md-3'></div>
+          <div class='col-sm-5 col-md-4 books '>
+             <div class='media'>
+              <img class='d-flex mr-2' src='img/forever_young.png' alt='Forever Young book' />
+              <div class='media-body'>
+                <p class='i_bold_small'><em>Forever Young</em></p>
+                <p class='small_text_book'>book by</p>
+                <p class='small_text_bold'>Nicholas Perricone</p>
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-5 col-md-4 books'>
+             <div class='media'>
+              <img class='d-flex mr-3' src='img/your_bones.png' alt='Forever Young book' />
+              <div class='media-body'>
+                <p class='i_bold_small'><em>Your Bones</em></p>
+                <p class='small_text_book'>book by</p>
+                <p class='small_text_bold'>Lara Pizzorno</p>
+              </div>
+            </div>
+          </div>
+          <div class='col-sm-1 col-md-'></div>
+    
+
+   </div>    
+  </div></div>
+</div></div>
+
+<!--References-->
+<div class='container-fluid'>
+  <div class='row justify-content-center'>
+      <div class='col-md-2'></div>
+      <div class='col-8'>
+        <h4 class='text_blue bold large_top_margin'>Scientific References</h4>
+        <ol>
+          <li>
+            <p>Marques A, Ferreira RJ, Santos E, et al. The accuracy of osteoporotic fracture risk prediction tools: a systematic review and meta-analysis. Ann Rheum Dis. 2015 Nov;74(11):1958-67.</p>
+            <p>doi:</p>
+            <p>10.1136/annrheumdis-2015-207807. Epub 2015 Aug 6. PNID:26248637,</p>
+          </li>
+
+          <li>
+             <p>Riggs BL, Melton LJ #rd. The worldwide problem of osteoporosis: insights afforded by epidemiology. Bone. 1995 Nov;17(5 Suppl):505S-511S. PMID: 8573428</p>
+          </li>
+
+          <li>
+            <p>https://www.algaecal.com/expert-insights/prescription-drugs-that-cause-osteoporosis/</p>
+          </li>
+        </ol> 
+
+        <h4 class='center underline light'><a class='text_blue' href='#!'>View Full Reference List...</a></h4> 
+      </div>
+      <div class='col-md-2'></div>
+      <div class='col-md-4'></div>
+
+      <div class='col-6 col-md-4 medium_margin'>
+
+        <div class='button_bottom'>
+          <img src='img/guarantee.png' class='guarantee ' alt='7 year stronger bones guarantee badge' />
+          <form action='#all_products'>
+            <input type='submit' value='   &nbsp; &nbsp;  &nbsp; Buy Now    ►' />  
+          </form>
+       
+        </div>
+      </div>
+      <div class='col-md-4'></div>
+  </div>
+</div>
+
+<!--Footer-->
+<div class='container-fluid'>
+  <div class='row justify-content-center '>
+  <div class='col-4'></div>
+  <div class='col-4 align-self-center bottom_logo_container'>
+      <img src='img/logo.png' alt='AlgaeCal Logo' />
+  </div>
+  <div class='col-4'></div>
+  <div class='col-1'></div>
+  <div class='col-10'>
+      <ul>
+        <li><a href='#!' class='lt_gray'>Shipping & Returns</a></li>
+        <li class='lt_gray'>|</li>
+        <li><a href='#!' class='lt_gray'>Health Disclaimer</a></li>
+        <li class='lt_gray'>|</li>
+        <li><a href='#!' class='lt_gray'>Legal and Privacy Policy</a></li>
+        <li class='lt_gray'>|</li>
+        <li><a href='#!' class='lt_gray'>Contact</a></li>
+        <li class='lt_gray'>|</li>
+        <li><a href='#!' class='lt_gray'>Order Now</a></li>
+      </ul>
+
+      <p class='center'>Copyright &copy; AlgaeCal</p>
+
+  </div>
+  <div class='col-1'></div>
+
+
+
+  </div>
+</div>
+  </body>
+  </html>  
